@@ -27,6 +27,7 @@ import (
 const (
 	newcHeaderLength = 110
 	newcMagic        = "070701"
+	crcMagic         = "070702"
 	strippedMagic    = "07070X"
 )
 
@@ -81,10 +82,10 @@ func readHeader(r io.Reader) (*Cpio_newc_header, error) {
 	}
 	if string(magic) == strippedMagic {
 		return readStrippedHeader(br)
-	} else if string(magic) != newcMagic {
+	} else if string(magic) != newcMagic && string(magic) != crcMagic {
 		return nil, fmt.Errorf("bad magic")
 	}
-	hdr.magic = newcMagic
+	hdr.magic = string(magic)
 
 	if err := br.Read16(&hdr.ino); err != nil {
 		return nil, err
