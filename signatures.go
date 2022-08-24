@@ -28,7 +28,7 @@ import (
 	"path"
 	"time"
 
-	"github.com/sassoftware/go-rpmutils/fileutil"
+	"github.com/dexterlb/go-rpmutils/fileutil"
 	"golang.org/x/crypto/openpgp/packet"
 )
 
